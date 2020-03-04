@@ -1,0 +1,43 @@
+buildscript {
+    ext.kotlin_version = '1.2.71'
+    repositories {
+        google()
+        jcenter()
+        maven{ url 'https://maven.aliyun.com/repository/google'}
+        // maven { url 'https://maven.aliyun.com/repository/google' }
+        // maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        // maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+
+
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // classpath 'com.google.gms:google-services:4.0.1'  //这行对谷歌服务库进行依赖
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+       
+        maven{ url 'https://maven.aliyun.com/repository/google'}
+        // maven { url 'https://maven.aliyun.com/repository/google' }
+        // maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        // maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
